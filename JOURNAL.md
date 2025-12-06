@@ -8,7 +8,7 @@ I can see how one would brute force it -- for each gridpoint if the entry is `'@
 - I started by solving part 1 by adding the coordinates of the bales to a set and then counting the neighbours of each bale in this set. Simple.
 - Then I decided the best way to iterate this for part 2 is to do it recursively. This led to having to repeatedly read out the data list into a set and then reconstruct the list each time so I wrote a little function to make a set of the coordinates to use as input for my recursive function.
 - I know Python isn't keen on recursive functions but the logic made sense to me. This is O(N^2) though since worst case scenario we need to scan the whole set of bales as many times as there are killable bales left...
-- Here is a solution from Gemini that uses a dictionary to track the number of neighbours of each bale and then when a bale is removed updates the count of each bale that the removed bale was neighbour to. Before I saw part 2 I had an idea like this and I wish I had remembered it when I started part 2!
+- Here is an O(N) solution from Gemini that uses a dictionary to track the number of neighbours of each bale and then when a bale is removed updates the count of each bale that the removed bale was neighbour to. Before I saw part 2 I had an idea like this and I wish I had remembered it when I started part 2!
 ```
 FUNCTION part_2_queue(grid):
 
@@ -45,7 +45,7 @@ FUNCTION part_2_queue(grid):
 
     RETURN total_removed
 ```
-
+- Today seemed easier than the previous days but it was less obvious how to do it well. I think this i the first day where I have not reached O(N).
 ---
 
 ## Days 1-3
