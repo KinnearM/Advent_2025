@@ -26,7 +26,27 @@ def part_1(fresh_codes, produce):
         break
   return counted
 
-
+    def part_2(fresh_codes):
+      
+    fresh_codes.sort()
     
+    first_start, first_end = fresh_codes[0]
+    
+    total_count = first_end - first_start + 1
+    current_max = first_end
 
-  print(part_1(fresh_codes, produce))
+    for next_start, next_end in fresh_codes[1:]:
+
+        effective_start = max(next_start, current_max + 1)
+        
+        if next_end >= effective_start:
+            added_amount = next_end - effective_start + 1
+            total_count += added_amount
+            
+            current_max = next_end
+            
+    return total_count
+
+print(part_1(fresh_codes, produce))
+print(part_2(fresh_codes))
+
