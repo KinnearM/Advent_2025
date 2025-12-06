@@ -1,7 +1,6 @@
 import os
 os.chdir(os.path.dirname(__file__))
 
-
 def reader():
   return open(f"input.txt", 'r').read().splitlines()
 
@@ -19,8 +18,6 @@ def part_1(data):
         two = max(line[id_one+1:])
         count += int(one + two) 
     return count
-
-part_1(data)
 
 def part_1_alt(data):
   """
@@ -65,8 +62,6 @@ def part_2(data):
       count += int("".join(digits))
     return count
 
-part_2(data)
-
 def part_2_stack(data):
   """ 
   Not me! Checked my answer with Gemini and it introduced me to stacks.
@@ -84,3 +79,6 @@ def part_2_stack(data):
         final_digits = stack[:12]
         total += int("".join(final_digits))  
     return total
+
+print("Part 1:", part_1(data))
+print("Part 2:", part_2(data))
