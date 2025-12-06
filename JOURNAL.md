@@ -1,4 +1,11 @@
 # Daily Log
+
+## Day 5
+- So the test case is misleading on this one! I saw the little ranges of numbers and I was like easy peasy we can plop those in a set and just N*O(1) look up our codes! Alas. So seeing the actual input data, my first instinct is that we only look at the first few digits of each range. e.g., we don't care if 415815768268371 in the range 415615768268371-416146851443768, we can really easily round our bounds up and down respectively and see it is in 415700000000000-416000000000000 which implies it is in the original range. We are rounding and proving a stronger condition. This is as slow as checking every value against the range if every produce code lies on the edge of a range. No wait this is slower than just checking the range. Nevermind.
+- I coded up my brute force code and for M ranges and N produce codes this is O(NM).
+- Now, if I sort the ranges by their lower bound (or upper bound), I can stop when I reach a lower bound that is higher than my value. This way it is only O(NlogM) cmomparisons plus the initial sort which is O(MlogM). Also, I no longer need to track which codes I've checked so my count can be an updating value instead of a set.
+  
+---
 ## Day 4
 - My log starts today! 
 - I opened the problem last night and slept on it as I have not seen a problem like this so far. 
