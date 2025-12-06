@@ -23,7 +23,6 @@ def part_1(arr):
     i+=1
   return zero_count
 
-part1(data)
 
 def part_2(arr):
   zero_count=0
@@ -45,4 +44,5 @@ def part_2(arr):
     i+=1
   return zero_count
 
-part2()
+print("Part 1:", part_1(data))
+print("Part 2:", part_2(data))
