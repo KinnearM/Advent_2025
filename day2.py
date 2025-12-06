@@ -7,7 +7,6 @@ def reader():
 
 data=reader()
 
-#part 1
 def split_2(string):
   low, up=string.split('-')
   n=len(up)
@@ -31,8 +30,6 @@ def part_1(arr):
   for string in arr:
     count+=split_2(string)
   return (count)
-
-part_1(data)
   
 def split_count(string):
   low, up=string.split('-')
@@ -59,4 +56,5 @@ def part_2(arr):
     count+=split_count(string)
   return (count)
 
-part_2(data)
+print("Part 1:", part_1(data))
+print("Part 2:", part_2(data))
