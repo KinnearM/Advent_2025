@@ -43,3 +43,17 @@ def part_1_alt(data):
             j += 1
         count += int(one + two)   
     return count
+
+def part_2(data):
+    count = 0
+    for line in data:
+      digits = list(line[:12])
+      line+= ' '
+      last_id=-1
+      for i in range(0,12):
+        digits[i]=max(line[last_id+1:i-12])
+        last_id = line[last_id+1:i-12].find(digits[i])+last_id+1
+      count += int("".join(digits))
+    return count
+
+part_2(data)
