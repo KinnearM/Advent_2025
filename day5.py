@@ -2,7 +2,7 @@ import os
 os.chdir(os.path.dirname(__file__))
 
 def reader():
-    return open("test2.txt", 'r').read()
+    return open("input.txt", 'r').read()
 
 raw_data = reader()
 block_1, block_2 = raw_data.strip().split('\n\n')
