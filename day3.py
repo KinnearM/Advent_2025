@@ -9,6 +9,9 @@ data=reader()
 
 
 def part_1(data):
+  """
+  I wrote this on my first attempt but then I wondered if max() and find() are still efficient when the strings get really long...
+  """
     count = 0
     for line in data:
         one = max(line[:-1]) 
@@ -20,6 +23,9 @@ def part_1(data):
 part_1(data)
 
 def part_1_alt(data):
+  """
+  An attempt to be lazy about parsing long strings. Sure is ugly.
+  """
     count = 0
     for line in data:
         n=len(line)
@@ -45,6 +51,9 @@ def part_1_alt(data):
     return count
 
 def part_2(data):
+  """
+  Generalisation of part_1() with moving sections. Is adding an empty element to the end of the line really clever or really stupid?
+  """
     count = 0
     for line in data:
       digits = list(line[:12])
@@ -57,3 +66,21 @@ def part_2(data):
     return count
 
 part_2(data)
+
+def part_2_stack(data):
+  """ 
+  Not me! Checked my answer with Gemini and it introduced me to stacks.
+  Keeping this here in case it is useful.
+  """ 
+    total = 0
+    for line in data:
+        stack = []
+        removable_count = len(line) - 12 
+        for digit in line:
+            while stack and stack[-1] < digit and removable_count > 0:
+                stack.pop()         
+                removable_count -= 1 
+            stack.append(digit)
+        final_digits = stack[:12]
+        total += int("".join(final_digits))  
+    return total
