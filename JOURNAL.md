@@ -1,5 +1,16 @@
 # Daily Log
 
+## Day 7
+- Today I just brute forced it. I got the answers but I will go back in and see if I can do better. Part 1 was easy, just got rid of all the useless data and then used a set to track the indices which currently have beams to select the splitters that are interacted with and update the new beam positions and just counting the splits as a variable as I go.
+- Part 2 just required that we track the number of beams in each position so I upgraded to a dictionary but the logic is exactly the same.
+- I think we could do this somehow without tracking every position by just scanning in the whole grid and counting the splitters in each row. We know that if every row had the max number of splitters we would get 2^row timelines so we can adapt this relationship to account for removed splitters. Instead of X<sub>n+1</sub> = 2 * X<sub>n</sub> we have X<sub>n+1</sub> = 2 * X<sub>n</sub> - missing_splitters but now we also need to account for the splitters which aren't interacted with and I don't see how to do that without tracking where the beams are. I think there is a clue in the fact that the splitting causes the parity of the indices of the positions to change so we end up with eg an odd beam which falls between the even placed splitters on the next row. To me this still quickly becomes about *where* the previous beams are so I end back at my original method.
+- What if we reversed the whole thing and started with 2^row and found some relationship that divides this number depending how many splitters are missing? Then we could also `pop()` each row and I am a big fan of popping these days.
+- The number of beams in each position is just Pascal's triangle with zeros in between. So can I start with my fully split {1,0,7,0,21,0,35,0,35,0,21,0,7,0,1} then the row above is missing my "6" splitter so actually it is {1,0,7,0,21,0,35,0,35,0,15,6,1,0,1} and we are 6 down. Now the row before that we are missing "5", "10" and "5" which means row six received {1,0,1,5,10,0,10,10,0,5,1,0,1} instead of {1,0,6,0,15,0,20,0,15,0,6,0,1} so was 20 down but also that's 40 that are not going to be split next row. So for each splitter of rank n that is missing we take 2*n away from the doubling of paths next round and add it to the round after? I'm right back to just simulating it again amn't I? Did I just nail this on the first go?
+- I'm a little disappointed there will only be 12 this year and past the halfway point I'm still not finding these very challenging! 
+
+  
+---
+
 ## Day 6
 - Part 1 was suspiciously easy. Good practice using `.pop()`. Add/multiplying each line to a list of running totals is the only thing that really made sense to do and it.
 - Ugh part 2 is gross. I guess we still have a list of length N and we still pop the operations but then we have to somehow keep track of which digits belong to which numbers.
