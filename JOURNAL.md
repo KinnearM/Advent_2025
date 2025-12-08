@@ -1,5 +1,54 @@
 # Daily Log
 
+## Day 8
+- Famous last words!
+- This is a graph theory problem. I don't even have a guess of how I would code this. The brute force approach is compute the distance between every pair of coordinates and then take the n shortest connections and plop the junctions into circuit sets. That's N! distances to compute.
+- Can we do like a list of 2 junctions and test each other juncion against the 2 and we find a connection that is smaller than the current one we replace the farther junction? Does that work? I feel like this gives a different answer depending where you start?
+- In 1D: [1,4,88,6,34,86,9,55,43,28,7] start with (1,4)->(1,4)->(4,6)->(6,7). Starting at other end (28,7)->(28,43)->(43,55)->(43,34) didn't think so.
+- Ok I found the overall logic myself but each function required help. Here is the overall structure:
+
+```
+FUNCTION part_1(data):
+
+N = Length of data
+uf = Initialize UnionFind(N)
+edges = Empty List
+
+FOR i FROM 0 TO N:
+    FOR j FROM i + 1 TO N:
+        dist = Calculate Distance between data[i] and data[j]
+        APPEND (dist, i, j) TO edges
+
+SORT edges BY distance (Ascending)
+
+cutoff = N
+
+FOR each (dist, u, v) IN edges FROM index 0 TO cutoff:
+    CALL uf.union(u, v)
+
+group_counts = Map()
+
+FOR i FROM 0 TO N:
+    root = CALL uf.find(i)
+    group_counts[root] = group_counts.get(root, 0) + 1
+
+sizes = SORT group_counts values (Descending)
+
+result = sizes[0] * sizes[1] * sizes[2]
+
+RETURN result
+```
+- My distance function was fine. I didn't actually go as far as computing the last sqrt since when x,y > 0, x^2 > y^2 => x > y and once we've compared the distances we never need them again.
+- My edge calculating was fine, I don't think there is any way to avoid just computing every single one. I used a `for i to n` and `for j range(i+1,n)` loop to avoid doing n^2 calculations instead of n! and make sure each pair only appears once in my list. then we sort nlogn and take the first 10 (1000) values.
+- So far so good but this is where I got lost.
+- The idea to use a union class was not mine, I tried to do it just using functions which meant a lot of rewriting a list of sets containing the elements of each circuit. I think I also missed cases where an edge connects two existing circuits.
+- Gemini used something like a linked list to track which junctions map to which other junctions and then tallied up how many junctions were part of each circuit. This is contained in a class so the function that creates the map can be called for each edge and the list of maps can be updated without rewriting the list of edges like I was doing.
+- Then you just sort and multiply to get the solution.
+- Part 2 was easy to adapt from my solution to part 1. I just added a counter to the union class to keep track of how many seperate circuits we have by starting at n and taking -1 every time we merge circuits and lose one independant circuit. Now we run the junction mapping function until we have only one group and at this point read out what the last edge was. Then we can multiply the x coordinates of the two junctions.
+- Folks on the subreddit are chatting about how easy today was and this was a struggle for me so we'll see how it goes from here lol
+
+---
+
 ## Day 7
 - Today I just brute forced it. I got the answers but I will go back in and see if I can do better. Part 1 was easy, just got rid of all the useless data and then used a set to track the indices which currently have beams to select the splitters that are interacted with and update the new beam positions and just counting the splits as a variable as I go.
 - Part 2 just required that we track the number of beams in each position so I upgraded to a dictionary but the logic is exactly the same.
