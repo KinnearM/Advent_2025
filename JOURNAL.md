@@ -39,13 +39,14 @@ result = sizes[0] * sizes[1] * sizes[2]
 RETURN result
 ```
 - My distance function was fine. I didn't actually go as far as computing the last sqrt since when x,y > 0, x^2 > y^2 => x > y and once we've compared the distances we never need them again.
-- My edge calculating was fine, I don't think there is any way to avoid just computing every single one. I used a `for i to n` and `for j range(i+1,n)` loop to avoid doing n^2 calculations instead of n! and make sure each pair only appears once in my list. then we sort nlogn and take the first 10 (1000) values.
+- My edge calculating was fine, I don't think there is any way to avoid just computing every single one. I used a `for i to n` and `for j range(i+1,n)` loop to avoid doing n^2 calculations instead of n! and make sure each pair only appears once in my list. then we sort nlogn and take the first 10 (1000) values. Originally I was trying to track just the 10 lowest weight edges but sorting every loop takes way longer than just storing them all and sorting at the end.
 - So far so good but this is where I got lost.
 - The idea to use a union class was not mine, I tried to do it just using functions which meant a lot of rewriting a list of sets containing the elements of each circuit. I think I also missed cases where an edge connects two existing circuits.
 - Gemini used something like a linked list to track which junctions map to which other junctions and then tallied up how many junctions were part of each circuit. This is contained in a class so the function that creates the map can be called for each edge and the list of maps can be updated without rewriting the list of edges like I was doing.
 - Then you just sort and multiply to get the solution.
 - Part 2 was easy to adapt from my solution to part 1. I just added a counter to the union class to keep track of how many seperate circuits we have by starting at n and taking -1 every time we merge circuits and lose one independant circuit. Now we run the junction mapping function until we have only one group and at this point read out what the last edge was. Then we can multiply the x coordinates of the two junctions.
 - Folks on the subreddit are chatting about how easy today was and this was a struggle for me so we'll see how it goes from here lol
+- Right, ok. I looked at the comments and it's all people being like "it's just kruskal's algorithm, just use min heap + unionfind" yeah I'm sure these are all easy if you've seen them before! I feel less terrible that I almost figured it out on my own. I do wish I had given myself time to feel out how to create unions of sets before I asked the robot for help but I thought I was just being an idiot because I couldn't solve it immediately. No more reading reddit!
 
 ---
 
