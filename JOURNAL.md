@@ -1,6 +1,18 @@
 # Daily Log
+
+## Day 10
+- Why am I doing this. Seriously.
+- Ok part 1 is easier at least.
+- The plan is:
+        1. load up the [] data as a set containing the indexes of the #s. These are the 1s that we want to turn off and the rest are 0s that need to end up back at 0 mod2. This is out state.
+        2. load up the () data as a list of sets. These are our actions.
+        3. pass the {} data for now and be suspicious of it for later
+        4. for each action, we either add or remove each element from the state set. I have discovered the way to do this is with ^. Originally I was going to have a dictionary with index:state and then take mod 2 of the state before summing and checking sum(states)==0. This way I only need to check is my state set is empty. XOR to the rescue.
+        5. The tricky part now is I want to do this for k actions. starting with k=1 we check each action. if we find no solution we more to k=2 and check all the pairs of actions and if we find a solution we return 2 and if we find no solution we move onto k=3 and so on. I think I need to write another little function that computes the combinations because otherwise I don't know how to do this without just coding it for each k and just hoping I can do enough that I cover all the cases in the input data lol.
+
 ## Day 9 part 2
 - After coding this all up and getting that my solution is too big I realised that my assumption that all 4 corners green => square is green is incorrect. I missed the part where it says "Tiles that are adjacent in your list will always be on either the same row or the same column" so for it to make sense that we can have a solid outline, all tiles between any green tiles must be filled. Actually this means my entire approach is wrong for finding green tiles AND deciding which squares qualify. instead of filling spaces I need to think about drawing lines and deciding which squares are inside the lines. I guess I can check if my square crosses any of the lines but then I need to somehow exclude squares entirely outside my outline. Actually, any square has at least 2 green corners so if there is any part of the square that is outside the boundary it will necessarily have to have crossed it.
+- I'm going to come back to 9 in a bit. I want to have a go at 10 part 1 at least.
 
 
 ---
