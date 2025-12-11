@@ -1,5 +1,25 @@
 # Daily Log
 
+## Day 9 is killing me
+- I had to take a day off because I had prep to do for GR but I'm back on it a day late.
+- Part 1 was UPSETTINGLY easy. I knew this couldn't last.
+- I am going to tackle part 2 by first asking some questions:
+      1. Is it faster to just fill out a grid of green tiles first and then look at my square OR do I start with my biggest square and then try to work out if each tile is green?
+      2. Is there a way to have all 4 corners be green and not have the entire square be green? I think there is not. I might try and prove it. If it is true then I just need to check the 4 corners of each square are green and this is sufficient to say the square is green.
+  - I can just adapt my code from part 1 to rank my squares by size and then pop the last one and check to see if it is green.
+  - the method for filling out green tiles is to colour all red tiles green. Then if a tile has at least one green tile either side of it, it is also green.
+  - So is it faster to fill out all green tiles and just check against an array of 0s and 1s or is it faster to prove a square is not green by some branching algorithm? For example the top left corner of our original biggest square is not green. I could check to see if it is green by seeing if it has red tiles on either side but then i would also need to check the condition on the squares on either side. This only goes two deep? Surely checking the two lines that intersect on a vertex is faster than checking the whole grid?
+  - How big is the grid? Also is it zeroed?
+  - I think this grid is literally floating. My biggest square is 4749672288 which is 70,000^2 ish. That's pretty big anyway, even if I only track binary values that is a big grid and I think the shape of the green region is probably too compicated for it to be worth tracking the ranges of the edges.
+  - Ok so I am going to try:
+        1. Zero the grid because why are we working with such large numbers?
+        2. Take the "other" two corners of my largest square. Check is it is between two green squares. If no check if is it between two squares which are between two green squares. No? Next square.
+        3. ???
+        4. Profit.
+- Colab reset my solution to part 1 is gone (y).
+- It's ok this takes like 3 min to code.
+- 
+
 ## Day 8
 - Famous last words!
 - This is a graph theory problem. I don't even have a guess of how I would code this. The brute force approach is compute the distance between every pair of coordinates and then take the n shortest connections and plop the junctions into circuit sets. That's N! distances to compute.
