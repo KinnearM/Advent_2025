@@ -1,5 +1,9 @@
 # Daily Log
+## Day 9 part 2
+- After coding this all up and getting that my solution is too big I realised that my assumption that all 4 corners green => square is green is incorrect. I missed the part where it says "Tiles that are adjacent in your list will always be on either the same row or the same column" so for it to make sense that we can have a solid outline, all tiles between any green tiles must be filled. Actually this means my entire approach is wrong for finding green tiles AND deciding which squares qualify. instead of filling spaces I need to think about drawing lines and deciding which squares are inside the lines. I guess I can check if my square crosses any of the lines but then I need to somehow exclude squares entirely outside my outline. Actually, any square has at least 2 green corners so if there is any part of the square that is outside the boundary it will necessarily have to have crossed it.
 
+
+---
 ## Day 9 is killing me
 - I had to take a day off because I had prep to do for GR but I'm back on it a day late.
 - Part 1 was UPSETTINGLY easy. I knew this couldn't last.
